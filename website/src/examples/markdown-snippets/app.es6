@@ -37,7 +37,6 @@ class MarkdownTextarea {
     wrapper.appendChild(element)
     wrapper.appendChild(this.uploadLine)
 
-    this.setupUploadLine()
     this.setupTextareaDrop()
     this.setupUppy()
   }
@@ -51,7 +50,7 @@ class MarkdownTextarea {
           template_id: TRANSLOADIT_EXAMPLE_TEMPLATE,
         },
       })
-      .use(Dashboard, { closeAfterFinish: true })
+      .use(Dashboard, { closeAfterFinish: true, trigger: '.form-upload' })
       .use(ImageEditor, { target: Dashboard })
       .use(Webcam, { target: Dashboard })
       .use(RemoteSources, {
@@ -59,6 +58,7 @@ class MarkdownTextarea {
       })
 
     this.uppy.on('complete', (result) => {
+      console.log('RESULT', result)
       const { successful, failed, transloadit } = result
       if (successful.length !== 0) {
         this.insertAttachments(
@@ -77,12 +77,6 @@ class MarkdownTextarea {
   setupTextareaDrop () {
     dragdrop(this.element, (files) => {
       this.uploadFiles(files)
-    })
-  }
-
-  setupUploadLine () {
-    this.uploadLine.addEventListener('click', () => {
-      this.pickFiles()
     })
   }
 
@@ -126,9 +120,9 @@ class MarkdownTextarea {
     this.uppy.addFiles(filesForUppy)
   }
 
-  pickFiles = () => {
-    this.uppy.getPlugin('Dashboard').openModal()
-  }
+  // pickFiles = () => {
+  //   this.uppy.getPlugin('Dashboard').openModal()
+  // }
 }
 
 const textarea = new MarkdownTextarea(document.querySelector('#new textarea'))
