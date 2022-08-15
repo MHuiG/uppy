@@ -1,0 +1,14 @@
+{
+  "name": "@uppy-example/transloadit",
+  "version": "0.0.0",
+  "type": "module",
+  "dependencies": {
+    "budo": "^11.3.2",
+    "he": "^1.2.0",
+    "uppy": "workspace:*"
+  },
+  "private": true,
+  "scripts": {
+    "start": "node server.cjs"
+  }
+}

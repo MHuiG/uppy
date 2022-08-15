@@ -1,30 +1,33 @@
 /* eslint-env browser */
 import marked from 'marked'
 import dragdrop from 'drag-drop'
-import Uppy from '@uppy/core'
-import Dashboard from '@uppy/dashboard'
-import Transloadit from '@uppy/transloadit'
-import RemoteSources from '@uppy/remote-sources'
-import Webcam from '@uppy/webcam'
-import ImageEditor from '@uppy/image-editor'
+
+const robodog = {}
 
 const TRANSLOADIT_EXAMPLE_KEY = '35c1aed03f5011e982b6afe82599b6a0'
 const TRANSLOADIT_EXAMPLE_TEMPLATE = '0b2ee2bc25dc43619700c2ce0a75164a'
 
 /**
  * A textarea for markdown text, with support for file attachments.
+ *
+ * ## Usage
+ *
+ * ```js
+ * const element = document.querySelector('textarea')
+ * const mdtxt = new MarkdownTextarea(element)
+ * mdtxt.install()
+ * ```
  */
 class MarkdownTextarea {
   constructor (element) {
     this.element = element
     this.controls = document.createElement('div')
     this.controls.classList.add('mdtxt-controls')
-    this.uploadLine = document.createElement('button')
-    this.uploadLine.setAttribute('type', 'button')
-    this.uploadLine.classList.add('form-upload')
+    this.uploadLine = document.createElement('div')
+    this.uploadLine.classList.add('mdtxt-upload')
 
     this.uploadLine.appendChild(
-      document.createTextNode('Tap here to upload an attachment'),
+      document.createTextNode('Upload an attachment'),
     )
   }
 
@@ -37,45 +40,18 @@ class MarkdownTextarea {
     wrapper.appendChild(element)
     wrapper.appendChild(this.uploadLine)
 
-    this.setupTextareaDrop()
-    this.setupUppy()
-  }
-
-  setupUppy = () => {
-    this.uppy = new Uppy({ autoProceed: true })
-      .use(Transloadit, {
-        waitForEncoding: true,
-        params: {
-          auth: { key: TRANSLOADIT_EXAMPLE_KEY },
-          template_id: TRANSLOADIT_EXAMPLE_TEMPLATE,
-        },
-      })
-      .use(Dashboard, { closeAfterFinish: true, trigger: '.form-upload' })
-      .use(ImageEditor, { target: Dashboard })
-      .use(Webcam, { target: Dashboard })
-      .use(RemoteSources, {
-        companionUrl: 'https://api2.transloadit.com/companion',
-      })
-
-    this.uppy.on('complete', (result) => {
-      const { successful, failed, transloadit } = result
-      if (successful.length !== 0) {
-        this.insertAttachments(
-          matchFilesAndThumbs(transloadit[0].results),
-        )
-      } else {
-        failed.forEach(error => {
-          console.error(error)
-          this.reportUploadError(error)
-        })
-      }
-      this.uppy.cancelAll()
-    })
+    this.setupUploadLine()
   }
 
   setupTextareaDrop () {
     dragdrop(this.element, (files) => {
       this.uploadFiles(files)
+    })
+  }
+
+  setupUploadLine () {
+    this.uploadLine.addEventListener('click', () => {
+      this.pickFiles()
     })
   }
 
@@ -107,20 +83,66 @@ class MarkdownTextarea {
     })
   }
 
-  uploadFiles = (files) => {
-    const filesForUppy = files.map(file => {
-      return {
-        data: file,
-        type: file.type,
-        name: file.name,
-        meta: file.meta || {},
+  matchFilesAndThumbs (results) {
+    const filesById = {}
+    const thumbsById = {}
+
+    results.forEach((result) => {
+      if (result.stepName === 'thumbnails') {
+        thumbsById[result.original_id] = result
+      } else {
+        filesById[result.original_id] = result
       }
     })
-    this.uppy.addFiles(filesForUppy)
+
+    return Object.keys(filesById).map((key) => ({
+      file : filesById[key],
+      thumb : thumbsById[key],
+    }))
+  }
+
+  uploadFiles () {
+    robodog.upload({
+      waitForEncoding: true,
+      params: {
+        auth: { key: TRANSLOADIT_EXAMPLE_KEY },
+        template_id: TRANSLOADIT_EXAMPLE_TEMPLATE,
+      },
+    }).then((result) => {
+      // Was cancelled
+      if (result == null) return
+      this.insertAttachments(
+        this.matchFilesAndThumbs(result.results),
+      )
+    }).catch((err) => {
+      console.error(err)
+      this.reportUploadError(err)
+    })
+  }
+
+  pickFiles () {
+    robodog.pick({
+      waitForEncoding: true,
+      params: {
+        auth: { key: TRANSLOADIT_EXAMPLE_KEY },
+        template_id: TRANSLOADIT_EXAMPLE_TEMPLATE,
+      },
+    }).then((result) => {
+      // Was cancelled
+      if (result == null) return
+      this.insertAttachments(
+        this.matchFilesAndThumbs(result.results),
+      )
+    }).catch((err) => {
+      console.error(err)
+      this.reportUploadError(err)
+    })
   }
 }
 
-const textarea = new MarkdownTextarea(document.querySelector('#new textarea'))
+const textarea = new MarkdownTextarea(
+  document.querySelector('#new textarea'),
+)
 textarea.install()
 
 function renderSnippet (title, text) {
@@ -149,40 +171,20 @@ function loadSnippets () {
   }
 }
 
-function matchFilesAndThumbs (results) {
-  const filesById = {}
-  const thumbsById = {}
-
-  for (const [stepName, result] of Object.entries(results)) {
-    result.forEach(result => {
-      if (stepName === 'thumbnails') {
-        thumbsById[result.original_id] = result
-      } else {
-        filesById[result.original_id] = result
-      }
-    })
-  }
-
-  return Object.keys(filesById).map((key) => ({
-    file: filesById[key],
-    thumb: thumbsById[key],
-  }))
-}
-
 document.querySelector('#new').addEventListener('submit', (event) => {
   event.preventDefault()
 
-  const title = event.target.elements['title'].value
+  const title = event.target.querySelector('input[name="title"]').value
     || 'Unnamed Snippet'
   const text = textarea.element.value
 
   saveSnippet(title, text)
   renderSnippet(title, text)
 
-  // eslint-disable-next-line no-param-reassign
   event.target.querySelector('input').value = ''
-  // eslint-disable-next-line no-param-reassign
   event.target.querySelector('textarea').value = ''
 })
 
-window.addEventListener('DOMContentLoaded', loadSnippets, { once: true })
+window.addEventListener('DOMContentLoaded', () => {
+  loadSnippets()
+})
