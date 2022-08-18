@@ -1,4 +1,4 @@
-import BasePlugin from '@uppy/core/lib/BasePlugin'
+import BasePlugin from '@uppy/core/lib/BasePlugin.js'
 import * as tus from 'tus-js-client'
 import { Provider, RequestClient, Socket } from '@uppy/companion-client'
 import emitSocketProgress from '@uppy/utils/lib/emitSocketProgress'
@@ -217,7 +217,7 @@ export default class Tus extends BasePlugin {
 
         let userProvidedPromise
         if (typeof opts.onBeforeRequest === 'function') {
-          userProvidedPromise = opts.onBeforeRequest(req)
+          userProvidedPromise = opts.onBeforeRequest(req, file)
         }
 
         if (hasProperty(queuedRequest, 'shouldBeRequeued')) {
