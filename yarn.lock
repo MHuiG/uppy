@@ -9978,9 +9978,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@uppy-example/transloadit-textarea@workspace:examples/transloadit-textarea"
   dependencies:
-    drag-drop: ^7.2.0
-    ecstatic: ^4.1.4
-    marked: ^4.0.18
+    marked: 4.0.18
+    uppy: "workspace:*"
+    vite: ^3.0.8
   languageName: unknown
   linkType: soft
 
@@ -13496,7 +13496,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"blob-to-buffer@npm:^1.0.2, blob-to-buffer@npm:^1.2.9":
+"blob-to-buffer@npm:^1.0.2":
   version: 1.2.9
   resolution: "blob-to-buffer@npm:1.2.9"
   checksum: 72c189abe09d55e7c28732b5bd429f523dab2cee9b7a8617589bd6d7e0e99eb1a91fdc253290b632298c9e1fd4facd909febcec1ce7c1aa40d3eec710f13b540
@@ -14761,13 +14761,6 @@ __metadata:
   version: 0.0.2
   resolution: "charenc@npm:0.0.2"
   checksum: 81dcadbe57e861d527faf6dd3855dc857395a1c4d6781f4847288ab23cffb7b3ee80d57c15bba7252ffe3e5e8019db767757ee7975663ad2ca0939bb8fcaf2e5
-  languageName: node
-  linkType: hard
-
-"charset@npm:^1.0.1":
-  version: 1.0.1
-  resolution: "charset@npm:1.0.1"
-  checksum: adf747e7bc76c0e47dbfbb555ef376f5adb2e67cad35718f19a2d02e27589345ccaf3c6170c185d2cc82298241f8478cdcdcab8be8ec429bf56807885f3c5300
   languageName: node
   linkType: hard
 
@@ -17496,16 +17489,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"drag-drop@npm:^7.2.0":
-  version: 7.2.0
-  resolution: "drag-drop@npm:7.2.0"
-  dependencies:
-    blob-to-buffer: ^1.2.9
-    run-parallel: ^1.2.0
-  checksum: 7cbc049c7538edf7c64054de1919ccfdc9c42555b9e09221cd2508b7217c29c3192e288de2f9c03ea220efe088d395c542902810e1228436baa558c13c5b6f5e
-  languageName: node
-  linkType: hard
-
 "duplexer2@npm:^0.1.2, duplexer2@npm:~0.1.0, duplexer2@npm:~0.1.2, duplexer2@npm:~0.1.4":
   version: 0.1.4
   resolution: "duplexer2@npm:0.1.4"
@@ -17635,22 +17618,6 @@ __metadata:
   dependencies:
     safe-buffer: ^5.0.1
   checksum: 207f9ab1c2669b8e65540bce29506134613dd5f122cccf1e6a560f4d63f2732d427d938f8481df175505aad94583bcb32c688737bb39a6df0625f903d6d93c03
-  languageName: node
-  linkType: hard
-
-"ecstatic@npm:^4.1.4":
-  version: 4.1.4
-  resolution: "ecstatic@npm:4.1.4"
-  dependencies:
-    charset: ^1.0.1
-    he: ^1.1.1
-    mime: ^2.4.1
-    minimist: ^1.1.0
-    on-finished: ^2.3.0
-    url-join: ^4.0.0
-  bin:
-    ecstatic: lib/bin.js
-  checksum: f1b1343ab6d84867effb48505ede0a1044c1a2fe2620702179e790a111a989781215892fb3f5885e9ab7529cbcf2634efb26e5245dff47c976918ec4631ba2d5
   languageName: node
   linkType: hard
 
@@ -22397,7 +22364,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"he@npm:^1.1.0, he@npm:^1.1.1, he@npm:^1.2.0":
+"he@npm:^1.1.0, he@npm:^1.2.0":
   version: 1.2.0
   resolution: "he@npm:1.2.0"
   bin:
@@ -27522,6 +27489,15 @@ hexo-filter-github-emojis@arturi/hexo-filter-github-emojis:
   languageName: node
   linkType: hard
 
+"marked@npm:4.0.18":
+  version: 4.0.18
+  resolution: "marked@npm:4.0.18"
+  bin:
+    marked: bin/marked.js
+  checksum: a13e886d5059a8500a6fd552feecc16e18fc3636aa491fce372384b1fdea67e323d67ac49f7618f6977e66ca96e39f27400eb5c1273d5ee9c2301e8c33e90dce
+  languageName: node
+  linkType: hard
+
 "marked@npm:^0.7.0":
   version: 0.7.0
   resolution: "marked@npm:0.7.0"
@@ -27546,15 +27522,6 @@ hexo-filter-github-emojis@arturi/hexo-filter-github-emojis:
   bin:
     marked: bin/marked.js
   checksum: 7575117f85a8986652f3ac8b8a7b95056c4c5fce01a1fc76dc4c7960412cb4c9bd9da8133487159b6b3ff84f52b543dfe9a36f826a5f358892b5ec4b6824f192
-  languageName: node
-  linkType: hard
-
-"marked@npm:^4.0.18":
-  version: 4.0.18
-  resolution: "marked@npm:4.0.18"
-  bin:
-    marked: bin/marked.js
-  checksum: a13e886d5059a8500a6fd552feecc16e18fc3636aa491fce372384b1fdea67e323d67ac49f7618f6977e66ca96e39f27400eb5c1273d5ee9c2301e8c33e90dce
   languageName: node
   linkType: hard
 
@@ -32776,6 +32743,17 @@ hexo-filter-github-emojis@arturi/hexo-filter-github-emojis:
   languageName: node
   linkType: hard
 
+"postcss@npm:^8.4.16":
+  version: 8.4.16
+  resolution: "postcss@npm:8.4.16"
+  dependencies:
+    nanoid: ^3.3.4
+    picocolors: ^1.0.0
+    source-map-js: ^1.0.2
+  checksum: 10eee25efd77868036403858577da0cefaf2e0905feeaba5770d5438ccdddba3d01cba8063e96b8aac4c6daa0ed413dd5ae0554a433a3c4db38df1d134cffc1f
+  languageName: node
+  linkType: hard
+
 "posthtml-parser@npm:^0.10.0, posthtml-parser@npm:^0.10.1":
   version: 0.10.1
   resolution: "posthtml-parser@npm:0.10.1"
@@ -35463,6 +35441,20 @@ hexo-filter-github-emojis@arturi/hexo-filter-github-emojis:
   languageName: node
   linkType: hard
 
+"rollup@npm:>=2.75.6 <2.77.0 || ~2.77.0":
+  version: 2.77.3
+  resolution: "rollup@npm:2.77.3"
+  dependencies:
+    fsevents: ~2.3.2
+  dependenciesMeta:
+    fsevents:
+      optional: true
+  bin:
+    rollup: dist/bin/rollup
+  checksum: b179c68249584565ddb5664a241e8e48c293b2207718d885b08ee25797d98857a383f06b544bb89819407da5a71557f4713309a278f61c4778bb32b1d3321a1c
+  languageName: node
+  linkType: hard
+
 "rollup@npm:^2.45.1, rollup@npm:^2.60.2":
   version: 2.60.2
   resolution: "rollup@npm:2.60.2"
@@ -35548,7 +35540,7 @@ hexo-filter-github-emojis@arturi/hexo-filter-github-emojis:
   languageName: node
   linkType: hard
 
-"run-parallel@npm:^1.0.0, run-parallel@npm:^1.1.9, run-parallel@npm:^1.2.0":
+"run-parallel@npm:^1.0.0, run-parallel@npm:^1.1.9":
   version: 1.2.0
   resolution: "run-parallel@npm:1.2.0"
   dependencies:
@@ -40377,13 +40369,6 @@ hexo-filter-github-emojis@arturi/hexo-filter-github-emojis:
   languageName: node
   linkType: hard
 
-"url-join@npm:^4.0.0":
-  version: 4.0.1
-  resolution: "url-join@npm:4.0.1"
-  checksum: f74e868bf25dbc8be6a8d7237d4c36bb5b6c62c72e594d5ab1347fe91d6af7ccd9eb5d621e30152e4da45c2e9a26bec21390e911ab54a62d4d82e76028374ee5
-  languageName: node
-  linkType: hard
-
 "url-loader@npm:^4.1.1":
   version: 4.1.1
   resolution: "url-loader@npm:4.1.1"
@@ -40977,6 +40962,38 @@ hexo-filter-github-emojis@arturi/hexo-filter-github-emojis:
   bin:
     vite: bin/vite.js
   checksum: 4920b5b0a4d4bd4a003121b2eb6ed41ac2ab69e6ab055db645e678c14e68d6eef780362d4d482cf439b576c37fb65dc9a7ebbbf90354e7ae362034a28eac9130
+  languageName: node
+  linkType: hard
+
+"vite@npm:^3.0.8":
+  version: 3.0.8
+  resolution: "vite@npm:3.0.8"
+  dependencies:
+    esbuild: ^0.14.47
+    fsevents: ~2.3.2
+    postcss: ^8.4.16
+    resolve: ^1.22.1
+    rollup: ">=2.75.6 <2.77.0 || ~2.77.0"
+  peerDependencies:
+    less: "*"
+    sass: "*"
+    stylus: "*"
+    terser: ^5.4.0
+  dependenciesMeta:
+    fsevents:
+      optional: true
+  peerDependenciesMeta:
+    less:
+      optional: true
+    sass:
+      optional: true
+    stylus:
+      optional: true
+    terser:
+      optional: true
+  bin:
+    vite: bin/vite.js
+  checksum: ec3f57d52f2bf28f2f89898053c2156f025a108a95e9308ce6580f43d8fdaae866f7988afa8207a8c8509069d3a0b50ee79b9a8050590a825f4b7771646c2755
   languageName: node
   linkType: hard
 

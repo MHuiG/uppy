@@ -1,0 +1,22 @@
+{
+  "name": "@uppy-example/transloadit-textarea",
+  "version": "0.0.0",
+  "type": "module",
+  "dependencies": {
+    "marked": "4.0.18",
+    "@uppy/core": "workspace:*",
+    "@uppy/dashboard": "workspace:*",
+    "@uppy/transloadit": "workspace:*",
+    "@uppy/image-editor": "workspace:*",
+    "@uppy/webcam": "workspace:*",
+    "@uppy/remote-sources": "workspace:*",
+    "@uppy/drop-target": "workspace:*"
+  },
+  "devDependencies": {
+    "vite": "^3.0.8"
+  },
+  "private": true,
+  "scripts": {
+    "start": "vite"
+  }
+}
