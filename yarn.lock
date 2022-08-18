@@ -9974,12 +9974,18 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@uppy-example/transloadit-textarea@workspace:examples/transloadit-textarea":
+"@uppy-example/transloadit-markdown-bin@workspace:examples/transloadit-markdown-bin":
   version: 0.0.0-use.local
-  resolution: "@uppy-example/transloadit-textarea@workspace:examples/transloadit-textarea"
+  resolution: "@uppy-example/transloadit-markdown-bin@workspace:examples/transloadit-markdown-bin"
   dependencies:
+    "@uppy/core": "workspace:*"
+    "@uppy/dashboard": "workspace:*"
+    "@uppy/drop-target": "workspace:*"
+    "@uppy/image-editor": "workspace:*"
+    "@uppy/remote-sources": "workspace:*"
+    "@uppy/transloadit": "workspace:*"
+    "@uppy/webcam": "workspace:*"
     marked: 4.0.18
-    uppy: "workspace:*"
     vite: ^3.0.8
   languageName: unknown
   linkType: soft
@@ -10267,7 +10273,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@uppy/drop-target@workspace:^, @uppy/drop-target@workspace:packages/@uppy/drop-target":
+"@uppy/drop-target@workspace:*, @uppy/drop-target@workspace:^, @uppy/drop-target@workspace:packages/@uppy/drop-target":
   version: 0.0.0-use.local
   resolution: "@uppy/drop-target@workspace:packages/@uppy/drop-target"
   dependencies:
@@ -10350,7 +10356,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@uppy/image-editor@workspace:^, @uppy/image-editor@workspace:packages/@uppy/image-editor":
+"@uppy/image-editor@workspace:*, @uppy/image-editor@workspace:^, @uppy/image-editor@workspace:packages/@uppy/image-editor":
   version: 0.0.0-use.local
   resolution: "@uppy/image-editor@workspace:packages/@uppy/image-editor"
   dependencies:
@@ -10472,7 +10478,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@uppy/remote-sources@workspace:^, @uppy/remote-sources@workspace:packages/@uppy/remote-sources":
+"@uppy/remote-sources@workspace:*, @uppy/remote-sources@workspace:^, @uppy/remote-sources@workspace:packages/@uppy/remote-sources":
   version: 0.0.0-use.local
   resolution: "@uppy/remote-sources@workspace:packages/@uppy/remote-sources"
   dependencies:

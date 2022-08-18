@@ -1,5 +1,5 @@
 {
-  "name": "@uppy-example/transloadit-textarea",
+  "name": "@uppy-example/transloadit-markdown-bin",
   "version": "0.0.0",
   "type": "module",
   "dependencies": {
