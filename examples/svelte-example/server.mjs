@@ -40,13 +40,13 @@ http.createServer((req, res) => {
         res.write(JSON.stringify(err))
         return res.end()
       }
-      const { file:[{ filepath, originalFilename, mimetype, size }] } = files
+      const { files: { filepath, originalFilename, mimetype, size } } = files
       console.log('saved file', { filepath, originalFilename, mimetype, size })
       res.writeHead(200, headers)
       res.write(JSON.stringify({ fields, files }))
       return res.end()
     })
   }
-}).listen(3020, () => {
+}).listen(9967, () => {
   console.log('server started')
 })

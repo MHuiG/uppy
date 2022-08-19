@@ -1,20 +1,20 @@
-# Uppy + Node Example
+# Uppy Markdown Editor
 
-This example uses Node server and `@uppy/xhr-upload` to upload files to the local file system.
+This example uses Uppy to handle images in a markdown editor.
 
 ## Run it
 
 To run this example, make sure you've correctly installed the **repository root**:
 
-```bash
-npm install
-npm run build
+```sh
+corepack yarn install
+corepack yarn build
 ```
 
 That will also install the dependencies for this example.
 
 Then, again in the **repository root**, start this example by doing:
 
-```bash
-npm run example node-xhr
+```sh
+corepack yarn workspace @uppy-example/transloadit-markdown-bin start
 ```
